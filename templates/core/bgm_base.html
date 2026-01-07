@@ -1,0 +1,180 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Site{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="{% static 'css/bgm_gate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/top.css' %}">
+
+
+    <style>
+        /* 常時BGMボタン（右上固定） */
+        .bgm-fab {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1055;
+            display: flex;
+            gap: 8px;
+        }
+
+        .bgm-fab .is-on {
+            display: inline;
+        }
+
+        .bgm-fab .is-off {
+            display: none;
+        }
+
+        .bgm-fab[data-enabled="0"] .is-on {
+            display: none;
+        }
+
+        .bgm-fab[data-enabled="0"] .is-off {
+            display: inline;
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <div data-barba="wrapper">
+
+        <!-- 常時BGMトグル -->
+        <div class="bgm-fab" id="bgm-fab" data-enabled="0">
+            <button
+                type="button"
+                class="btn btn-sm btn-light shadow"
+                id="bgm-toggle-btn"
+            >
+                <span class="is-on">🔊 BGM: ON</span>
+                <span class="is-off">🔇 BGM: OFF</span>
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-sm btn-outline-light shadow"
+                id="bgm-open-settings"
+            >
+                ⚙
+            </button>
+        </div>
+
+        <!-- BGM設定モーダル（Fullscreen / 強制選択） -->
+        <div
+            class="modal fade"
+            id="bgmModal"
+            tabindex="-1"
+            aria-labelledby="bgmModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content bgm-modal-content">
+
+                    <div class="modal-header bgm-modal-header">
+                        <h5 class="modal-title" id="bgmModalLabel">BGM 設定</h5>
+                    </div>
+
+                    <div class="modal-body p-0 bgm-modal-body">
+                        <main class="screen bgm-modal-screen" aria-label="BGM選択画面">
+                            <!-- INTRO -->
+                            <section id="intro" class="intro is-active" aria-label="導入アニメーション">
+                                <div class="intro__panel">
+                                    <p class="intro__boot">BOOTING...</p>
+
+                                    <div
+                                        class="intro__bar"
+                                        role="progressbar"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        aria-valuenow="0"
+                                    >
+                                        <div class="intro__bar-fill"></div>
+                                    </div>
+
+                                    <p class="intro__line">
+                                        <span class="intro__prompt">INSERT COIN</span>
+                                        <span class="intro__blink" aria-hidden="true">▮</span>
+                                    </p>
+
+                                    <p class="intro__hint">Click / Enter / Space でスキップ</p>
+                                </div>
+                            </section>
+
+                            <!-- MAIN UI -->
+                            <section id="gate" class="gate is-hidden" aria-label="BGM設定メニュー">
+                                <div class="frame">
+                                    <header class="header">
+                                        <p class="header__brand">RETRO SYSTEM</p>
+                                        <p class="header__ver">v1.0</p>
+                                    </header>
+
+                                    <section class="title">
+                                        <h1 class="title__text">SOUND OPTION</h1>
+                                        <p class="title__sub">BGMを再生しますか？</p>
+                                    </section>
+
+                                    <section class="menu" aria-label="選択メニュー">
+                                        <div id="bgm-form" class="bgm-form">
+                                            <button type="button" class="menu__item is-active" data-bgm="on">
+                                                <span class="menu__cursor" aria-hidden="true">▶</span>
+                                                <span class="menu__label">BGM ON</span>
+                                            </button>
+
+                                            <button type="button" class="menu__item" data-bgm="off">
+                                                <span class="menu__cursor" aria-hidden="true">▶</span>
+                                                <span class="menu__label">BGM OFF</span>
+                                            </button>
+                                        </div>
+
+                                        <p class="hint">↑↓ / W S で選択　Enterで決定</p>
+                                    </section>
+
+                                    <footer class="footer">
+                                        <p class="footer__text">※ 実素材は使用せず雰囲気のみ再現しています</p>
+                                    </footer>
+                                </div>
+                            </section>
+
+                            <div class="scanlines" aria-hidden="true"></div>
+                            <div class="vignette" aria-hidden="true"></div>
+                        </main>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Barba container -->
+        <main
+            data-barba="container"
+            data-barba-namespace="{% block namespace %}Base{% endblock %}"
+        >
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/howler"></script>
+    <script src="{% static 'js/top.js' %}"></script>
+    <script src="{% static 'js/bgm_gate_modal.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,81 @@
+{% extends "core/bgm_base.html" %}
+{% load static %}
+
+{% block title %}Top{% endblock %}
+{% block namespace %}Top{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/top.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+
+        <video
+            class="top__video top__video--desktop"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+        >
+            <source src="{% static 'video/top_desktop.mp4' %}" type="video/mp4">
+        </video>
+
+        <video
+            class="top__video top__video--mobile"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+        >
+            <source src="{% static 'video/top_desktop.mp4' %}" type="video/mp4">
+        </video>
+
+        <div class="top__shade" aria-hidden="true"></div>
+
+        <!-- メニューオーバーレイ（今は手動で開く想定） -->
+        <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+            <div class="menu-overlay__panel">
+                <button type="button" class="menu-overlay__close" id="menu-close" aria-label="閉じる">
+                    CLOSE
+                </button>
+
+                <div class="menu-overlay__items">
+                    <a class="menu-overlay__btn" href="{% url 'core:portfolio' %}" data-barba-link>
+                        PORTFOLIO
+                    </a>
+                    <a class="menu-overlay__btn" href="{% url 'core:about' %}" data-barba-link>
+                        ABOUT US
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI -->
+        <div class="top__ui">
+
+            <!-- zipmotion 起動演出（BGM決定後に出す） -->
+            <div class="top__title" id="zipmotion-title" aria-hidden="true">
+                <div class="zipmotion">
+                    <span class="zipmotion__layer zipmotion__layer--back">zipmotion</span>
+                    <span class="zipmotion__layer zipmotion__layer--front">zipmotion</span>
+                </div>
+                <p class="zipmotion__sub">PRESS MENU</p>
+            </div>
+
+            <!-- メニューを開くボタン（BGM決定後に活性化） -->
+            <button type="button" class="top__open is-locked" id="menu-open" aria-disabled="true">
+                MENU
+            </button>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/top.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,415 @@
+.top {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.top__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.02);
+}
+
+.top__video--desktop {
+    display: block;
+}
+
+.top__video--mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .top__video--desktop {
+        display: none;
+    }
+
+    .top__video--mobile {
+        display: block;
+    }
+}
+
+.top__shade {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.30);
+}
+
+.top__ui {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 32px;
+}
+
+.top__open {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 999px;
+    letter-spacing: 0.12em;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.top__open:hover {
+    background: rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================
+   Menu Overlay
+   ========================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 400ms ease;
+}
+
+.menu-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu-overlay__panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-overlay__close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.menu-overlay__items {
+    display: grid;
+    gap: 16px;
+    width: min(520px, 88vw);
+}
+
+.menu-overlay__btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    padding: 18px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    letter-spacing: 0.14em;
+    transform: translateY(12px);
+    opacity: 0;
+    transition: transform 450ms ease, opacity 450ms ease, background 200ms ease;
+}
+
+.menu-overlay.is-open .menu-overlay__btn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.menu-overlay__btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+
+@media (min-width: 1024px) {
+    .menu-overlay__items {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        width: min(880px, 86vw);
+    }
+
+    .menu-overlay__btn {
+        padding: 22px 20px;
+        font-size: 14px;
+        letter-spacing: 0.22em;
+    }
+
+    .menu-overlay__btn {
+        transform: translateY(0);
+    }
+
+    .menu-overlay__btn:nth-child(1) {
+        transform: translateX(-24px);
+    }
+
+    .menu-overlay__btn:nth-child(2) {
+        transform: translateX(24px);
+    }
+
+    .menu-overlay.is-open .menu-overlay__btn {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+/* =========================
+   Zipmotion title animation
+   ========================= */
+
+   .top__title {
+    position: absolute;
+    top: 14vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.top__title.is-show {
+    opacity: 1;
+}
+
+.zipmotion {
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    line-height: 1;
+}
+
+.zipmotion__layer {
+    display: block;
+    font-weight: 800;
+    font-size: clamp(44px, 7.2vw, 96px);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow:
+        0 0 18px rgba(255, 255, 255, 0.18),
+        0 0 46px rgba(255, 255, 255, 0.10);
+    transform: translate3d(0, 0, 0);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.zipmotion__layer--back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(255, 255, 255, 0.25);
+    filter: blur(1px);
+}
+
+.zipmotion__sub {
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* 起動演出：IN */
+.top__title.is-show .zipmotion__layer--front {
+    animation: zipmotion-in 900ms cubic-bezier(0.12, 0.9, 0.18, 1) both,
+        zipmotion-glitch 1400ms steps(2, end) 1 both;
+}
+
+.top__title.is-show .zipmotion__layer--back {
+    animation: zipmotion-ghost 900ms cubic-bezier(0.12, 0.9, 0.18, 1) both;
+}
+
+.top__title.is-show .zipmotion__sub {
+    animation: zipmotion-sub 700ms ease 520ms both;
+}
+
+@keyframes zipmotion-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-18px) scale(0.98);
+        filter: blur(10px);
+    }
+    55% {
+        opacity: 1;
+        transform: translateY(0) scale(1.02);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes zipmotion-ghost {
+    0% {
+        opacity: 0;
+        transform: translateY(-14px) translateX(6px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0) translateX(-4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+    }
+}
+
+@keyframes zipmotion-sub {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ちょいグリッチ */
+@keyframes zipmotion-glitch {
+    0% {
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+    }
+    18% {
+        clip-path: inset(10% 0 62% 0);
+        transform: translate(-2px, 1px);
+    }
+    36% {
+        clip-path: inset(54% 0 16% 0);
+        transform: translate(2px, -1px);
+    }
+    54% {
+        clip-path: inset(22% 0 46% 0);
+        transform: translate(-1px, 0);
+    }
+    72% {
+        clip-path: inset(70% 0 6% 0);
+        transform: translate(1px, 1px);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+    }
+}
+
+/* MENUボタン：BGM決定後にロック解除＋軽く呼吸 */
+.top__open.is-locked {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.top__open.is-ready {
+    opacity: 1;
+    pointer-events: auto;
+    animation: menu-breathe 1200ms ease-in-out infinite;
+}
+
+@keyframes menu-breathe {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+        transform: translateY(-2px);
+        box-shadow: 0 0 26px rgba(255, 255, 255, 0.12);
+    }
+    100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+
+
+/* =========================
+   Responsive for Mobile
+   ========================= */
+@media (max-width: 768px) {
+    .top {
+        height: 100svh;
+    }
+
+    .top__video {
+        transform: none;
+    }
+
+    .top__shade {
+        background: rgba(0, 0, 0, 0.38);
+    }
+
+    /* zipmotion：スマホは少し下げて見切れ防止 */
+    .top__title {
+        top: 12svh;
+        width: 92vw;
+    }
+
+    .zipmotion__layer {
+        font-size: clamp(34px, 10.5vw, 56px);
+        letter-spacing: 0.14em;
+    }
+
+    .zipmotion__sub {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+    }
+
+    /* MENUボタン：下部中央で押しやすく */
+    .top__ui {
+        padding: 22px;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .top__open {
+        width: min(86vw, 420px);
+        padding: 16px 20px;
+        border-radius: 16px;
+        font-size: 14px;
+        letter-spacing: 0.22em;
+        min-height: 52px;
+    }
+
+    /* メニュー：縦並びをよりスマホ向けに */
+    .menu-overlay__items {
+        width: min(86vw, 420px);
+        gap: 14px;
+    }
+
+    .menu-overlay__btn {
+        padding: 18px 18px;
+        min-height: 56px;
+        border-radius: 16px;
+        font-size: 14px;
+        letter-spacing: 0.18em;
+    }
+
+    .menu-overlay__close {
+        top: 14px;
+        right: 14px;
+        padding: 10px 12px;
+        min-height: 44px;
+    }
+}
+
