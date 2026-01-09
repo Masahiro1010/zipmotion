@@ -24,10 +24,42 @@
         if (!title) {
             return;
         }
-
+    
         title.classList.add("is-show");
         title.setAttribute("aria-hidden", "false");
+    
+        window.setTimeout(() => {
+            title.classList.add("is-live");
+            startZipmotionRandomPulse(container);
+        }, 950);
     }
+    
+
+    function startZipmotionRandomPulse(container) {
+        const title = container.querySelector("#zipmotion-title");
+        if (!title) {
+            return;
+        }
+    
+        function schedulePulse() {
+            // 次の発火までの待ち時間（ミリ秒）
+            const delay = 3000 + Math.random() * 4000; // 3〜7秒
+    
+            window.setTimeout(() => {
+                title.classList.add("is-pulse");
+    
+                // ビリビリ時間（短く）
+                window.setTimeout(() => {
+                    title.classList.remove("is-pulse");
+                    schedulePulse();
+                }, 320);
+            }, delay);
+        }
+    
+        schedulePulse();
+    }
+    
+    
 
     function setMenuReady(container) {
         const openBtn = container.querySelector("#menu-open");
