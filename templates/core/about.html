@@ -1,0 +1,113 @@
+{% extends "core/bgm_base.html" %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+{% block namespace %}About{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="about">
+
+        <header class="about-hero">
+            <div class="about-hero__inner">
+                <p class="about-hero__kicker">ABOUT</p>
+                <h1 class="about-hero__title">We craft motion.<br>We grow social.</h1>
+                <p class="about-hero__lead">
+                    動画制作とSNS運用を軸に、企画から制作、運用まで一気通貫で支援します。
+                </p>
+            </div>
+        </header>
+
+        <main class="about-main">
+            <section class="about-section" aria-label="会社概要">
+                <div class="about-section__head">
+                    <h2 class="about-section__title">会社概要</h2>
+                    <p class="about-section__sub">Company Profile</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3 class="about-card__title">事業内容</h3>
+                        <ul class="about-list">
+                            <li>動画制作（企画 / 撮影 / 編集 / モーション）</li>
+                            <li>SNS運用（設計 / 投稿 / 分析 / 改善）</li>
+                            <li>クリエイティブ制作（短尺 / 広告 / サムネ）</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-card">
+                        <h3 class="about-card__title">基本情報</h3>
+                        <dl class="about-dl">
+                            <div class="about-dl__row">
+                                <dt>会社名</dt>
+                                <dd>Zipmotion Inc.</dd>
+                            </div>
+                            <div class="about-dl__row">
+                                <dt>主な業務</dt>
+                                <dd>動画制作 / SNS運用</dd>
+                            </div>
+                            <div class="about-dl__row">
+                                <dt>所在地</dt>
+                                <dd>Tokyo, JP</dd>
+                            </div>
+                            <div class="about-dl__row">
+                                <dt>対応領域</dt>
+                                <dd>企画〜制作〜運用〜分析</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section" aria-label="ニュース">
+                <div class="about-section__head">
+                    <h2 class="about-section__title">ニュース</h2>
+                    <p class="about-section__sub">News</p>
+                </div>
+
+                <div class="news">
+                    <article class="news-item">
+                        <div class="news-item__meta">
+                            <time datetime="2026-01-01">2026.01.01</time>
+                            <span class="news-item__tag">INFO</span>
+                        </div>
+                        <h3 class="news-item__title">サイトを公開しました</h3>
+                        <p class="news-item__text">動画制作とSNS運用の情報を順次掲載します。</p>
+                    </article>
+
+                    <article class="news-item">
+                        <div class="news-item__meta">
+                            <time datetime="2025-12-15">2025.12.15</time>
+                            <span class="news-item__tag">UPDATE</span>
+                        </div>
+                        <h3 class="news-item__title">制作実績ページを準備中です</h3>
+                        <p class="news-item__text">ポートフォリオ公開に向けて順次整備しています。</p>
+                    </article>
+
+                    <article class="news-item">
+                        <div class="news-item__meta">
+                            <time datetime="2025-12-01">2025.12.01</time>
+                            <span class="news-item__tag">NOTICE</span>
+                        </div>
+                        <h3 class="news-item__title">SNS運用支援の相談受付を開始しました</h3>
+                        <p class="news-item__text">戦略設計から投稿改善までワンストップで対応します。</p>
+                    </article>
+                </div>
+            </section>
+
+            <nav class="about-nav" aria-label="ページ遷移">
+                <a class="about-nav__back" href="{% url 'core:top' %}" data-barba-link>
+                    ← BACK TO TOP
+                </a>
+            </nav>
+        </main>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/about.js' %}"></script>
+{% endblock %}

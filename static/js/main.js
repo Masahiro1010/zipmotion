@@ -170,18 +170,90 @@ function initAppOnce() {
 
 initAppOnce();
 
+
+// =============================
+// Barba Fede Transition
+// =============================
+function getFadeOverlayEl() {
+    return document.getElementById("barba-fade-overlay");
+}
+
+function wait(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+async function fadeToBlack() {
+    const el = getFadeOverlayEl();
+    if (!el) {
+        return;
+    }
+
+    el.classList.add("is-visible");
+
+    // 暗転が完了するまで待つ（CSS 720ms + 余裕）
+    await wait(780);
+
+    // 黒の最大状態をほんの少し保持（映画っぽくなる）
+    await wait(120);
+}
+
+async function fadeFromBlack() {
+    const el = getFadeOverlayEl();
+    if (!el) {
+        return;
+    }
+
+    // About側が描画できてから明転したいので、1フレーム待つ
+    await wait(30);
+
+    el.classList.remove("is-visible");
+
+    // 明転が完了するまで待つ
+    await wait(780);
+}
+
+
 // =============================
 // Barba
 // =============================
 barba.init({
     transitions: [
         {
-            name: "fade",
-            leave() {},
-            enter() {},
+            name: "fade-black-smooth",
+
+            async leave(data) {
+                // まず暗転（これでTopが自然に見えなくなる）
+                await fadeToBlack();
+
+                // 暗転しきった後に旧コンテナを隠す（チラつき防止）
+                if (data.current?.container) {
+                    data.current.container.style.visibility = "hidden";
+                }
+            },
+
+            async enter(data) {
+                window.scrollTo(0, 0);
+
+                // 新コンテナは見える状態にしておく（黒の裏で準備）
+                if (data.next?.container) {
+                    data.next.container.style.visibility = "visible";
+                }
+
+                // 明転（ここでAboutが滑らかに出てくる）
+                await fadeFromBlack();
+            },
+
+            after(data) {
+                // 次の遷移のために戻す
+                if (data.current?.container) {
+                    data.current.container.style.visibility = "";
+                }
+            },
         },
     ],
 });
+
+
 
 barba.hooks.beforeEnter(() => {
     cleanupBootstrapModals();
@@ -195,6 +267,10 @@ barba.hooks.afterEnter((data) => {
     if (data.next?.namespace === "Top") {
         window.initTopPage?.(data.next.container);
         openBgmModal();
+    }
+
+    if (data.next?.namespace === "About") {
+        window.initAboutPage?.(data.next.container);
     }
 });
 
