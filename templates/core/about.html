@@ -62,6 +62,40 @@
                 </div>
             </section>
 
+
+            <section class="about-section" aria-label="メンバー">
+                <div class="about-section__head">
+                    <h2 class="about-section__title">MEMBER</h2>
+                    <p class="about-section__sub">Team</p>
+                </div>
+            
+                <div class="member-grid">
+                    <article class="member-card">
+                        <div class="member-photo" aria-hidden="true"></div>
+                        <div class="member-body">
+                            <h3 class="member-name">Taro Yamada</h3>
+                            <p class="member-role">Director / Editor</p>
+                            <p class="member-text">
+                                映像ディレクションと編集を担当。世界観設計から仕上げまで一貫して対応。
+                            </p>
+                        </div>
+                    </article>
+            
+                    <article class="member-card">
+                        <div class="member-photo" aria-hidden="true"></div>
+                        <div class="member-body">
+                            <h3 class="member-name">Hanako Suzuki</h3>
+                            <p class="member-role">SNS Planner</p>
+                            <p class="member-text">
+                                SNS運用・企画設計を担当。データ分析と改善提案が強み。
+                            </p>
+                        </div>
+                    </article>
+        
+                </div>
+            </section>
+            
+
             <section class="about-section" aria-label="ニュース">
                 <div class="about-section__head">
                     <h2 class="about-section__title">ニュース</h2>
@@ -99,7 +133,10 @@
             </section>
 
             <nav class="about-nav" aria-label="ページ遷移">
-                <a class="about-nav__back" href="{% url 'core:top' %}" data-barba-link>
+                <a class="about-nav__link" href="{% url 'core:portfolio' %}" data-barba-link>
+                    PORTFOLIO →
+                </a>
+                <a class="about-nav__link" href="{% url 'core:top' %}" data-barba-link>
                     ← BACK TO TOP
                 </a>
             </nav>

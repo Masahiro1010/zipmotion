@@ -272,6 +272,14 @@ barba.hooks.afterEnter((data) => {
     if (data.next?.namespace === "About") {
         window.initAboutPage?.(data.next.container);
     }
+
+    if (data.next?.namespace === "Portfolio") {
+        window.initPortfolioPage?.(data.next.container);
+    }
+
+    if (data.next?.namespace === "Contact") {
+        window.initContactPage?.(data.next.container);
+    }
 });
 
 function initAppOnce() {

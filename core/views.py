@@ -11,3 +11,7 @@ class AboutView(TemplateView):
 
 class PortfolioView(TemplateView):
     template_name = "core/portfolio.html"
+    
+
+class ContactView(TemplateView):
+    template_name = "core/contact.html"

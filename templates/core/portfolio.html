@@ -1,0 +1,94 @@
+{% extends "core/bgm_base.html" %}
+{% load static %}
+
+{% block title %}Portfolio{% endblock %}
+{% block namespace %}Portfolio{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'core/css/portfolio.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="pf">
+
+        <header class="pf-hero">
+            <div class="pf-hero__inner">
+                <p class="pf-hero__kicker">PORTFOLIO</p>
+                <h1 class="pf-hero__title">Selected Works</h1>
+                <p class="pf-hero__lead">
+                    動画制作・SNS運用の実績を掲載します（準備中）。
+                    まずは雰囲気を固めるため、画像はプレースホルダーで表示しています。
+                </p>
+            </div>
+        </header>
+
+        <main class="pf-main">
+            <section class="pf-section" aria-label="実績一覧">
+                <div class="pf-section__head">
+                    <h2 class="pf-section__title">制作実績</h2>
+                    <p class="pf-section__sub">Works</p>
+                </div>
+
+                <div class="pf-grid">
+                    <article class="pf-card">
+                        <div class="pf-thumb" aria-hidden="true"></div>
+                        <div class="pf-card__body">
+                            <h3 class="pf-card__title">Short Movie / Brand</h3>
+                            <p class="pf-card__meta">動画制作 / 編集 / モーション</p>
+                            <p class="pf-card__text">
+                                コンセプト設計から編集まで。短尺で世界観を伝える構成。
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="pf-card">
+                        <div class="pf-thumb" aria-hidden="true"></div>
+                        <div class="pf-card__body">
+                            <h3 class="pf-card__title">SNS Operation / Growth</h3>
+                            <p class="pf-card__meta">SNS運用 / 企画 / 分析</p>
+                            <p class="pf-card__text">
+                                投稿設計〜運用改善。KPIに沿って継続的に最適化。
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="pf-card">
+                        <div class="pf-thumb" aria-hidden="true"></div>
+                        <div class="pf-card__body">
+                            <h3 class="pf-card__title">Ad Creative / Short Form</h3>
+                            <p class="pf-card__meta">広告 / クリエイティブ / 短尺</p>
+                            <p class="pf-card__text">
+                                視聴維持を意識したテンポとコピー設計で制作。
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="pf-card">
+                        <div class="pf-thumb" aria-hidden="true"></div>
+                        <div class="pf-card__body">
+                            <h3 class="pf-card__title">Motion Graphics</h3>
+                            <p class="pf-card__meta">モーション / タイポ / 演出</p>
+                            <p class="pf-card__text">
+                                音・余白・質感のバランスで“高級感”を表現。
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <nav class="pf-nav" aria-label="ページ遷移">
+                <a class="pf-nav__link" href="{% url 'core:about' %}" data-barba-link>
+                    ← ABOUT
+                </a>
+                <a class="pf-nav__link" href="{% url 'core:top' %}" data-barba-link>
+                    BACK TO TOP →
+                </a>
+            </nav>
+        </main>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/portfolio.js' %}"></script>
+{% endblock %}

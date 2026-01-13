@@ -1,0 +1,73 @@
+{% extends "core/bgm_base.html" %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+{% block namespace %}Contact{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'core/css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="ct">
+
+        <header class="ct-hero">
+            <div class="ct-hero__inner">
+                <p class="ct-hero__kicker">CONTACT</p>
+                <h1 class="ct-hero__title">Let’s build something.</h1>
+                <p class="ct-hero__lead">
+                    動画制作・SNS運用のご相談は、メールにて受け付けています。
+                    内容がまとまっていなくても大丈夫です。
+                </p>
+            </div>
+        </header>
+
+        <main class="ct-main">
+            <section class="ct-section" aria-label="お問い合わせ方法">
+                <div class="ct-section__head">
+                    <h2 class="ct-section__title">メールでお問い合わせ</h2>
+                    <p class="ct-section__sub">Email</p>
+                </div>
+
+                <div class="ct-card">
+                    <p class="ct-card__text">
+                        下のボタンを押すと、メール作成画面が開きます。
+                        件名・本文は自動で入ります（あとで自由に編集OK）。
+                    </p>
+
+                    <a
+                        class="ct-mail"
+                        href="mailto:info@example.com?subject=Inquiry%20from%20Zipmotion%20Website&body=%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A%0A%E3%81%94%E4%BA%88%E7%AE%97%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E7%B4%8D%E6%9C%9F%EF%BC%9A%0A%0A%E8%A3%9C%E8%B6%B3%EF%BC%9A"
+                        rel="noopener"
+                    >
+                        OPEN MAIL APP →
+                    </a>
+
+                    <div class="ct-meta">
+                        <p class="ct-meta__label">Email</p>
+                        <p class="ct-meta__value">info@example.com</p>
+                    </div>
+
+                    <p class="ct-note">
+                        ※ 端末の設定により、メールアプリが未設定の場合は起動しないことがあります。
+                        その場合は上記アドレス宛に直接送信してください。
+                    </p>
+                </div>
+            </section>
+
+            <nav class="ct-nav" aria-label="ページ遷移">
+                <a class="ct-nav__link" href="{% url 'core:portfolio' %}" data-barba-link>
+                    ← PORTFOLIO
+                </a>
+                <a class="ct-nav__link" href="{% url 'core:top' %}" data-barba-link>
+                    BACK TO TOP →
+                </a>
+            </nav>
+        </main>
+
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'core/js/contact.js' %}"></script>
+{% endblock %}

@@ -191,8 +191,25 @@
 .about-nav {
     margin-top: 44px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    gap: 12px;
 }
+
+.about-nav__link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.82);
+    letter-spacing: 0.20em;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 12px 14px;
+    border-radius: 12px;
+}
+
+.about-nav__link:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
 
 .about-nav__back {
     text-decoration: none;
@@ -344,8 +361,17 @@
     }
 
     .about-nav {
+        flex-direction: column;
         margin-top: 34px;
     }
+    
+    .about-nav__link {
+        width: 100%;
+        text-align: center;
+        min-height: 48px;
+        border-radius: 14px;
+    }
+    
 
     .about-nav__back {
         width: 100%;
@@ -365,4 +391,65 @@
         grid-template-columns: 84px 1fr;
     }
 }
+
+
+/* ===== Member ===== */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+@media (max-width: 900px) {
+    .member-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.member-card {
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 18px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.member-photo {
+    height: 220px;
+    background: #06070a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    /*写真追加時に以下を有効化*/
+    /*
+    background-image: url(...);
+    background-size: cover;
+    background-position: center;
+    */
+}
+
+.member-body {
+    padding: 16px 18px 18px;
+}
+
+.member-name {
+    margin: 0 0 6px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+}
+
+.member-role {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    opacity: 0.7;
+}
+
+.member-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.85;
+    opacity: 0.82;
+}
+
 
