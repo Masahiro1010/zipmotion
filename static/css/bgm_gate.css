@@ -353,6 +353,155 @@ Fullscreen Modal override
     display: none;
 }
 
+/* =============================
+   CinemaScope Overlay
+============================= */
+.cinema-scope {
+    position: fixed;
+    inset: 0;
+    z-index: 10001; /* fade overlayより上にしたいなら上げる */
+    pointer-events: none;
+    opacity: 0;
+}
+
+.cinema-scope__bar {
+    background: #000;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.cinema-scope__bar--bottom {
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.08);
+}
+
+.cinema-scope__bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0; /* アニメで伸ばす */
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.cinema-scope__bar--top {
+    top: 0;
+}
+
+.cinema-scope__bar--bottom {
+    bottom: 0;
+}
+
+.cinema-scope__title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) translateY(10px);
+    opacity: 0;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 44px);
+    color: rgba(255, 255, 255, 0.92);
+    text-transform: none;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.45));
+}
+
+/* 表示トリガ */
+.cinema-scope.is-visible {
+    opacity: 1;
+}
+
+/* バーの展開＆タイトル出現 */
+.cinema-scope.is-visible .cinema-scope__bar {
+    transition: height 560ms cubic-bezier(0.2, 0.9, 0.1, 1);
+}
+
+.cinema-scope.is-visible .cinema-scope__bar--top,
+.cinema-scope.is-visible .cinema-scope__bar--bottom {
+    height: min(12vh, 110px);
+}
+
+.cinema-scope.is-visible .cinema-scope__title {
+    transition: opacity 420ms ease, transform 520ms cubic-bezier(0.2, 0.9, 0.1, 1);
+    transition-delay: 160ms;
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+}
+
+/* 消える時 */
+.cinema-scope.is-hiding .cinema-scope__bar {
+    transition: height 520ms cubic-bezier(0.25, 0.8, 0.2, 1);
+    height: 0;
+}
+
+.cinema-scope.is-hiding .cinema-scope__title {
+    transition: opacity 240ms ease, transform 300ms ease;
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-6px);
+}
+
+/* アニメ苦手設定 */
+@media (prefers-reduced-motion: reduce) {
+    .cinema-scope.is-visible .cinema-scope__bar--top,
+    .cinema-scope.is-visible .cinema-scope__bar--bottom {
+        height: min(10vh, 90px);
+        transition: none;
+    }
+
+    .cinema-scope.is-visible .cinema-scope__title {
+        transition: none;
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+#barba-fade-overlay {
+    z-index: 10000;
+}
+
+#cinema-scope {
+    z-index: 10001;
+}
+
+
+/* =============================
+   CinemaScope - Smartphone TRUE
+============================= */
+@media (max-width: 768px) {
+    .cinema-scope.is-visible .cinema-scope__bar--top,
+    .cinema-scope.is-visible .cinema-scope__bar--bottom {
+        height: 60vh; /* ← ここが核心 */
+        max-height: 300px;
+    }
+
+    .cinema-scope__title {
+        font-size: clamp(18px, 7vw, 28px);
+        letter-spacing: 0.2em;
+        padding: 0 8vw;
+        text-align: center;
+    }
+}
+
+
+/* さらに小さい端末（iPhone SE系） */
+@media (max-width: 390px) {
+    .cinema-scope.is-visible .cinema-scope__bar--top,
+    .cinema-scope.is-visible .cinema-scope__bar--bottom {
+        height: 22vh;
+    }
+
+    .cinema-scope__title {
+        font-size: clamp(16px, 8vw, 24px);
+        letter-spacing: 0.18em;
+    }
+}
+
+
+@media (max-width: 380px) {
+    .cinema-scope__title {
+        white-space: normal;
+        line-height: 1.1;
+    }
+}
 
 
 

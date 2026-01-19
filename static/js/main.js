@@ -172,6 +172,34 @@ initAppOnce();
 
 
 // =============================
+// CinemaScope helpers
+// =============================
+function getCinemaScopeEl() {
+    return document.getElementById("cinema-scope");
+}
+
+function showCinemaScope() {
+    console.log("1showCinemaScope");
+    const el = document.getElementById("cinema-scope");
+    if (!el) return;
+
+    console.log("showCinemaScope");
+
+    el.classList.remove("is-hiding");
+    el.classList.add("is-visible");
+    el.setAttribute("aria-hidden", "false");
+}
+
+function hideCinemaScope() {
+    const el = document.getElementById("cinema-scope");
+    if (!el) return;
+
+    el.classList.add("is-hiding");
+    el.classList.remove("is-visible");
+    el.setAttribute("aria-hidden", "true");
+}
+
+// =============================
 // Barba Fede Transition
 // =============================
 function getFadeOverlayEl() {
@@ -183,17 +211,19 @@ function wait(ms) {
 }
 
 async function fadeToBlack() {
+    console.log("1showfadeToBlack");
     const el = getFadeOverlayEl();
     if (!el) {
         return;
     }
+    console.log("showfadeToBlack");
+
+    // ここでCinemaScopeを出す（追加）
+    showCinemaScope();
 
     el.classList.add("is-visible");
 
-    // 暗転が完了するまで待つ（CSS 720ms + 余裕）
     await wait(780);
-
-    // 黒の最大状態をほんの少し保持（映画っぽくなる）
     await wait(120);
 }
 
@@ -203,14 +233,20 @@ async function fadeFromBlack() {
         return;
     }
 
-    // About側が描画できてから明転したいので、1フレーム待つ
-    await wait(30);
+    await wait(500);
 
     el.classList.remove("is-visible");
 
-    // 明転が完了するまで待つ
-    await wait(780);
+    // ここでCinemaScopeを消す（追加）
+    hideCinemaScope();
+
+    await wait(500);
 }
+
+
+
+
+
 
 
 // =============================
@@ -222,14 +258,27 @@ barba.init({
             name: "fade-black-smooth",
 
             async leave(data) {
-                // まず暗転（これでTopが自然に見えなくなる）
+                const from = data.current?.namespace;
+                const to = data.next?.namespace;
+            
+                const onlyTopToAbout = (from === "Top" && to === "About");
+            
+                if (onlyTopToAbout) {
+                    showCinemaScope();
+                }
+            
                 await fadeToBlack();
-
-                // 暗転しきった後に旧コンテナを隠す（チラつき防止）
+            
+                if (!onlyTopToAbout) {
+                    // 全遷移で出したくない場合はfadeToBlack側のshowCinemaScopeを消して、
+                    // ここだけで制御する
+                }
+            
                 if (data.current?.container) {
                     data.current.container.style.visibility = "hidden";
                 }
             },
+            
 
             async enter(data) {
                 window.scrollTo(0, 0);
