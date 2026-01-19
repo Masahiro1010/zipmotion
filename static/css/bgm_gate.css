@@ -469,8 +469,8 @@ Fullscreen Modal override
 @media (max-width: 768px) {
     .cinema-scope.is-visible .cinema-scope__bar--top,
     .cinema-scope.is-visible .cinema-scope__bar--bottom {
-        height: 60vh; /* ← ここが核心 */
-        max-height: 300px;
+        height: 35vh; /* ← ここが核心 */
+        max-height: 260px;
     }
 
     .cinema-scope__title {
