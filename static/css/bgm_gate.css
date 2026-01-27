@@ -464,7 +464,7 @@ Fullscreen Modal override
 
 
 /* =============================
-   CinemaScope - Smartphone TRUE
+CinemaScope - Smartphone TRUE
 ============================= */
 @media (max-width: 768px) {
     .cinema-scope.is-visible .cinema-scope__bar--top,

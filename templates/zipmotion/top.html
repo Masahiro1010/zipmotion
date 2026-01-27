@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Zipmotion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Pixel font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'zipmotion/css/top.css' %}">
+</head>
+<body>
+    <!-- CinemaScope (fixed) -->
+    <div class="cinema-scope" aria-hidden="true">
+        <div class="cinema-scope__bar cinema-scope__bar--top"></div>
+        <div class="cinema-scope__bar cinema-scope__bar--bottom"></div>
+    </div>
+
+    <!-- CRT overlay (subtle) -->
+    <div class="crt" aria-hidden="true"></div>
+
+    <main>
+        <section class="hero" id="top">
+            <div class="hero__inner">
+                <p class="hero__tagline pixel">
+                    We craft motion. We grow social.
+                </p>
+
+                <div class="gauge" role="img" aria-label="Zipmotion scroll gauge">
+                    <div class="gauge__frame">
+                        <div class="gauge__fill" id="gaugeFill"></div>
+                        <div class="gauge__shine"></div>
+                        <div class="gauge__text">
+                            <span class="gauge__title pixel">Zipmotion</span>
+                            <span class="gauge__pct pixel" id="gaugePct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="hero__hint pixel">
+                    Scroll up
+                    <span class="hero__hintArrow" aria-hidden="true">▲</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Scroll area (dummy sections for now) -->
+        <section class="section">
+            <div class="section__inner">
+                <h2 class="section__title">About</h2>
+                <p class="section__text">
+                    Zipmotion is a motion-first social studio. Minimal, sharp, and built to convert attention into action.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section__inner">
+                <h2 class="section__title">Works</h2>
+                <p class="section__text">
+                    Short-form, brand films, launch edits, and platform-native design systems.
+                </p>
+            </div>
+        </section>
+
+        <section class="section section--last">
+            <div class="section__inner">
+                <h2 class="section__title">Contact</h2>
+                <p class="section__text">
+                    Let’s craft your next scroll-stopping motion.
+                </p>
+
+                <a class="btn pixel" href="#top">Back to Top</a>
+            </div>
+        </section>
+    </main>
+
+    <script href="{% static 'zipmotion/js/top.js' %}"></script>
+</body>
+</html>
+
